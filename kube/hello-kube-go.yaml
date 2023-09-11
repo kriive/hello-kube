@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kube-go
+  labels:
+    app: hello-kube-go
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hello-kube-go
+  template:
+    metadata: 
+      labels: 
+        app: hello-kube-go
+    spec:
+      containers:
+      - name: hello-kube-go
+        image: kriivecorp/hello-kube:1.0.0
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kube-service
+spec:
+  selector:
+    app: hello-kube-go
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 8080
+    nodePort: 31337
