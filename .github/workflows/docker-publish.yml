@@ -74,11 +74,16 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          # Enable amd64 and aarch64
+          platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ github.ref_name }}
+            COMMIT-${{ github.sha }}
 
 
       # Sign the resulting Docker image digest except on PRs.
