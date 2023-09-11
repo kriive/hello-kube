@@ -14,8 +14,8 @@ COPY *.go .
 COPY http ./http
 COPY cmd ./cmd
 
-ENV VERSION="0.0.0-development"
-ENV COMMIT="deadbeef"
+ARG VERSION="0.0.0-development"
+ARG COMMIT="deadbeef"
 
 RUN CGO_ENABLED=0 go build -ldflags "-X 'main.version=$VERSION' -X 'main.commit=$COMMIT'" -o hellod ./cmd/hellod
 
