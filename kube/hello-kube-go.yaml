@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello-kube-go
-        image: kriivecorp/hello-kube:1.0.0
+        image: ghcr.io/kriive/hello-kube:1.0.0
         ports:
         - containerPort: 8080
 ---
